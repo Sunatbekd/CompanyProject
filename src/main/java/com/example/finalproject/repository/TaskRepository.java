@@ -1,0 +1,18 @@
+package com.example.finalproject.repository;
+
+import com.example.finalproject.dto.TaskResponse;
+import com.example.finalproject.entity.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface TaskRepository extends JpaRepository<Task, Long> {
+
+
+    @Query("select new com.example.finalproject.dto.TaskResponse(t.id,t.taskName,t.taskText,t.deadline)from Task t")
+    List<TaskResponse> getAllTasks();
+}
